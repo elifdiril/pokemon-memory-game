@@ -8,9 +8,11 @@
   margin: 5px;
   width: 90px;
   height: 90px;
+  -webkit-box-shadow: -1px 0px 16px 4px rgba(0, 0, 0, 0.72);
+  box-shadow: -1px 0px 16px 4px rgba(0, 0, 0, 0.72);
 }
 
-.item-img{
+.item-img {
   width: 90px;
   height: 90px;
 }
