@@ -30,7 +30,14 @@ function GetPokemons() {
         }
       }
 
+      let copyObj = {};
+      for (let i = 0; i < newItemList.length; i++) {
+        copyObj = {...newItemList[i], isOpen: false };
+        newItemList[i] = copyObj;
+      }
+
       setItems(shuffleArray(newItemList));
+      console.log(newItemList)
     }
   }, [data]);
 
@@ -43,12 +50,10 @@ function GetPokemons() {
   }
 
   return (
-    <div>
-      <div className="pokemonList">
-        {items && items.map((item) => (
-          <PokemonCard item={item} key={item.id} />
-        ))}
-      </div>
+    <div className="pokemonList">
+      {items && items.map((item) =>
+        <PokemonCard key={item.id} item={item} />
+      )}
     </div>
   );
 }
