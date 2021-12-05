@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { POKEMONS_QUERY } from '../queries/pokemonList';
 import PokemonCard from './PokemonCard';
 import '../App.css';
+import { nanoid } from 'nanoid';
 
 function GetPokemons() {
   const { loading, error, data } = useQuery(POKEMONS_QUERY);
@@ -32,7 +33,7 @@ function GetPokemons() {
 
       let copyObj = {};
       for (let i = 0; i < newItemList.length; i++) {
-        copyObj = { ...newItemList[i], isOpen: false };
+        copyObj = { ...newItemList[i], isOpen: false, id: nanoid() };
         newItemList[i] = copyObj;
       }
 
@@ -42,7 +43,7 @@ function GetPokemons() {
 
   const turnCard = (id) => {
     const newCards = items.map((item) => {
-      if (item.number === id) {
+      if (item.id === id) {
         const updatedItem = {
           ...item,
           isOpen: !item.isOpen,
