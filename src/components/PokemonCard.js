@@ -1,10 +1,11 @@
 import React from 'react';
 import '../App.css';
 
-function PokemonCard({ item }) {
+function PokemonCard({ item, turnCard }) {
+  
   return (
     <div className="item">
-        <img src={item.image} alt="" className="item-img" onClick={() => console.log("sefsdf")} />
+        <img src={item.image} alt="" className="item-img" onClick={() => turnCard(item.number)} />
     </div>
   );
 }

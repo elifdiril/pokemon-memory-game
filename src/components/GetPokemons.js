@@ -32,14 +32,28 @@ function GetPokemons() {
 
       let copyObj = {};
       for (let i = 0; i < newItemList.length; i++) {
-        copyObj = {...newItemList[i], isOpen: false };
+        copyObj = { ...newItemList[i], isOpen: false };
         newItemList[i] = copyObj;
       }
 
       setItems(shuffleArray(newItemList));
-      console.log(newItemList)
     }
   }, [data]);
+
+  const turnCard = (id) => {
+    const newCards = items.map((item) => {
+      if (item.number === id) {
+        const updatedItem = {
+          ...item,
+          isOpen: !item.isOpen,
+        };
+
+        return updatedItem;
+      }
+      return item;
+    });
+    setItems(newCards);
+  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -52,7 +66,7 @@ function GetPokemons() {
   return (
     <div className="pokemonList">
       {items && items.map((item) =>
-        <PokemonCard key={item.id} item={item} />
+        <PokemonCard key={item.id} item={item} turnCard={turnCard} />
       )}
     </div>
   );
