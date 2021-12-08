@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid';
 function GetPokemons() {
   const { loading, error, data } = useQuery(POKEMONS_QUERY);
   const [items, setItems] = useState([]);
+  const [selectedCards, setSelectedCards] = useState([]);
   let pokemons = [];
 
   const shuffleArray = (array) => {
@@ -33,7 +34,7 @@ function GetPokemons() {
 
       let copyObj = {};
       for (let i = 0; i < newItemList.length; i++) {
-        copyObj = { ...newItemList[i], isOpen: false, id: nanoid() };
+        copyObj = { ...newItemList[i], isOpen: false, id: nanoid(), isMatched: false };
         newItemList[i] = copyObj;
       }
 
@@ -42,19 +43,61 @@ function GetPokemons() {
   }, [data]);
 
   const turnCard = (id) => {
+    let newSelectedCard = {};
     const newCards = items.map((item) => {
       if (item.id === id) {
         const updatedItem = {
           ...item,
           isOpen: !item.isOpen,
         };
-
+        if (!item.isOpen) {
+          newSelectedCard = updatedItem
+        }
         return updatedItem;
       }
       return item;
     });
+    setSelectedCards([...selectedCards, newSelectedCard]);
     setItems(newCards);
   }
+
+  useEffect(() => {
+    if (selectedCards.length >= 2) {
+      if (selectedCards[0].number !== selectedCards[1].number) {
+        let newCards;
+        selectedCards.forEach(selectedCardItem => {
+          newCards = items.map((item) => {
+            if (item.id === selectedCardItem.id) {
+              const updatedItem = {
+                ...item,
+                isOpen: !item.isOpen,
+              };
+              return updatedItem;
+            }
+            return item;
+          });
+        })
+        setItems(newCards);
+      }
+      else {
+        let newCards;
+        selectedCards.forEach(selectedCardItem => {
+          newCards = items.map((item) => {
+            if (item.id === selectedCardItem.id) {
+              const updatedItem = {
+                ...item,
+                isMatched: !item.isMatched,
+              };
+              return updatedItem;
+            }
+            return item;
+          });
+        })
+        setItems(newCards);
+      }
+      setSelectedCards([])
+    }
+  }, [selectedCards]);
 
   if (loading) {
     return <div>Loading...</div>;
