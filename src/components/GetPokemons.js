@@ -44,58 +44,54 @@ function GetPokemons() {
 
   const turnCard = (id) => {
     let newSelectedCard = {};
-    const newCards = items.map((item) => {
-      if (item.id === id) {
-        const updatedItem = {
-          ...item,
-          isOpen: !item.isOpen,
-        };
-        if (!item.isOpen) {
-          newSelectedCard = updatedItem
+    if (selectedCards.length < 2) {
+      const newCards = items.map((item) => {
+        if (item.id === id && !item.isMatched) {
+          const updatedItem = {
+            ...item,
+            isOpen: !item.isOpen,
+          };
+          if (!item.isOpen) {
+            newSelectedCard = updatedItem
+          }
+          return updatedItem;
         }
-        return updatedItem;
-      }
-      return item;
-    });
-    setSelectedCards([...selectedCards, newSelectedCard]);
-    setItems(newCards);
+        return item;
+      });
+      setSelectedCards([...selectedCards, newSelectedCard]);
+      setItems(newCards);
+    }
   }
 
   useEffect(() => {
-    if (selectedCards.length >= 2) {
+    if (selectedCards.length === 2) {
       if (selectedCards[0].number !== selectedCards[1].number) {
-        let newCards;
-        selectedCards.forEach(selectedCardItem => {
-          newCards = items.map((item) => {
-            if (item.id === selectedCardItem.id) {
-              const updatedItem = {
-                ...item,
-                isOpen: !item.isOpen,
-              };
-              return updatedItem;
-            }
-            return item;
-          });
-        })
-        setItems(newCards);
+        let newCards = items.map((item) => {
+          if (item.id === selectedCards[0].id || item.id === selectedCards[1].id) {
+            const updatedItem = {
+              ...item,
+              isOpen: false,
+            };
+            return updatedItem;
+          }
+          return item;
+        });
+        setTimeout(() => setItems(newCards), 1000);
       }
       else {
-        let newCards;
-        selectedCards.forEach(selectedCardItem => {
-          newCards = items.map((item) => {
-            if (item.id === selectedCardItem.id) {
+        let newCards = items.map((item) => {
+            if (item.id === selectedCards[0].id || item.id === selectedCards[1].id) {
               const updatedItem = {
                 ...item,
-                isMatched: !item.isMatched,
+                isMatched: true,
               };
               return updatedItem;
             }
             return item;
           });
-        })
-        setItems(newCards);
+          setTimeout(() => setItems(newCards), 1000);
       }
-      setSelectedCards([])
+      setTimeout(() => setSelectedCards([]), 1010);
     }
   }, [selectedCards]);
 
