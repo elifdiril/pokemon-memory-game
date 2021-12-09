@@ -9,6 +9,8 @@ function GetPokemons() {
   const { loading, error, data } = useQuery(POKEMONS_QUERY);
   const [items, setItems] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
+  const [move, setMove] = useState(0);
+  const [score, setScore] = useState(0);
   let pokemons = [];
 
   const shuffleArray = (array) => {
@@ -43,6 +45,7 @@ function GetPokemons() {
   }, [data]);
 
   const turnCard = (id) => {
+    setMove(move + 1);
     let newSelectedCard = {};
     if (selectedCards.length < 2) {
       const newCards = items.map((item) => {
@@ -80,16 +83,16 @@ function GetPokemons() {
       }
       else {
         let newCards = items.map((item) => {
-            if (item.id === selectedCards[0].id || item.id === selectedCards[1].id) {
-              const updatedItem = {
-                ...item,
-                isMatched: true,
-              };
-              return updatedItem;
-            }
-            return item;
-          });
-          setTimeout(() => setItems(newCards), 1000);
+          if (item.id === selectedCards[0].id || item.id === selectedCards[1].id) {
+            const updatedItem = {
+              ...item,
+              isMatched: true,
+            };
+            return updatedItem;
+          }
+          return item;
+        });
+        setTimeout(() => setItems(newCards), 1000);
       }
       setTimeout(() => setSelectedCards([]), 1010);
     }
@@ -104,10 +107,17 @@ function GetPokemons() {
   }
 
   return (
-    <div className="pokemonList">
-      {items && items.map((item) =>
-        <PokemonCard key={item.id} item={item} turnCard={turnCard} />
-      )}
+    <div className="box">
+      <div className="pokemonList">
+        {items && items.map((item) =>
+          <PokemonCard key={item.id} item={item} turnCard={turnCard} />
+        )}
+      </div>
+      <div class="css-doodle">
+        <div className="score-table">Score Table</div>
+        <div>Movement: {move}</div>
+        <div>Point: {score}</div>
+      </div>
     </div>
   );
 }

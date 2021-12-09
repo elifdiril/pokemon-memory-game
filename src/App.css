@@ -3,6 +3,7 @@
 }
 
 .item {
+  background-color: white;
   padding: 10px;
   border: solid 2px #eee;
   margin: 5px;
@@ -21,4 +22,49 @@
   display: flex;
   flex-wrap: wrap;
   width: 500px;
+}
+
+.css-doodle {
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(40, #8fb5bf), color-stop(100, #24707d));
+  background: -moz-linear-gradient(top left, #8fb5bf 40%, #24707d 100%);
+  background: -ms-linear-gradient(top left, #8fb5bf 40%, #24707d 100%);
+  background: -o-linear-gradient(top left, #8fb5bf 40%, #24707d 100%);
+  background: linear-gradient(to bottom right, #8fb5bf 40%, #24707d 100%);
+  width: 200px;
+  height: 200px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  border-color: #000;
+  border-style: solid;
+  border-radius: 16px;
+  border-width: 3px;
+}
+
+.css-doodle > div {
+  margin: 25px;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.box > div {
+  margin: 35px;
+}
+
+.score-table {
+  font-family: helvetica, sans-serif;
+  font-size: 24px;
+  color: #053241;
+  font-style: italic;
+  font-weight: bold;
+  font-variant: normal;
+  text-align: center;
+  letter-spacing: 0px;
+  line-height: 20px;
 }
