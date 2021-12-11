@@ -3,7 +3,9 @@ import { useQuery } from '@apollo/client';
 import { POKEMONS_QUERY } from '../queries/pokemonList';
 import PokemonCard from './PokemonCard';
 import '../App.css';
+import shuffleArray from '../helpers/shuffleArray';
 import { nanoid } from 'nanoid';
+import calculateScore from '../helpers/calculateScore';
 
 function GetPokemons() {
   const { loading, error, data } = useQuery(POKEMONS_QUERY);
@@ -12,14 +14,6 @@ function GetPokemons() {
   const [move, setMove] = useState(0);
   const [score, setScore] = useState(0);
   let pokemons = [];
-
-  const shuffleArray = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
 
   useEffect(() => {
     if (data) {
@@ -84,6 +78,9 @@ function GetPokemons() {
       else {
         let newCards = items.map((item) => {
           if (item.id === selectedCards[0].id || item.id === selectedCards[1].id) {
+
+            setScore(calculateScore(move, score));
+
             const updatedItem = {
               ...item,
               isMatched: true,
