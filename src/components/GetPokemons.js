@@ -6,6 +6,7 @@ import '../App.css';
 import shuffleArray from '../helpers/shuffleArray';
 import { nanoid } from 'nanoid';
 import calculateScore from '../helpers/calculateScore';
+import Winning from './Winning';
 
 function GetPokemons() {
   const { loading, error, data } = useQuery(POKEMONS_QUERY);
@@ -13,18 +14,36 @@ function GetPokemons() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [move, setMove] = useState(0);
   const [score, setScore] = useState(0);
-  let pokemons = [];
+  const [gameStat, setGameStat] = useState(0);
+  const [pokemons, setPokemons] = useState([]);
+
+  useEffect(() => {
+    if (move >= 12) {
+      let openedCardNumber = 0;
+      items.map((item) => {
+        if (item.isOpen) {
+          openedCardNumber++;
+        }
+      })
+
+      if (openedCardNumber === 12) {
+        setGameStat(1);
+      }
+    }
+  }, [move]);
 
   useEffect(() => {
     if (data) {
-      pokemons = data.pokemons;
+      let _pokemons = data.pokemons;
+      setPokemons(data.pokemons);
       let newItemList = [];
       for (let i = 0; i < 6; i++) {
-        let randomPokemonId = Math.floor(Math.random() * pokemons.length);
-        if (pokemons[randomPokemonId]) {
-          newItemList.push(pokemons[randomPokemonId]);
-          newItemList.push(pokemons[randomPokemonId]);
-          pokemons = pokemons.filter(item => item.id !== randomPokemonId);
+        let randomPokemonId = Math.floor(Math.random() * _pokemons.length);
+        if (_pokemons[randomPokemonId]) {
+          newItemList.push(_pokemons[randomPokemonId]);
+          newItemList.push(_pokemons[randomPokemonId]);
+          _pokemons = _pokemons.filter(item => item.id !== randomPokemonId);
+          setPokemons(_pokemons);
         }
       }
 
@@ -39,7 +58,6 @@ function GetPokemons() {
   }, [data]);
 
   const turnCard = (id) => {
-    setMove(move + 1);
     let newSelectedCard = {};
     if (selectedCards.length < 2) {
       const newCards = items.map((item) => {
@@ -48,6 +66,10 @@ function GetPokemons() {
             ...item,
             isOpen: !item.isOpen,
           };
+
+          //open card then increase the number of move
+          setMove(move + 1);
+
           if (!item.isOpen) {
             newSelectedCard = updatedItem
           }
@@ -104,18 +126,21 @@ function GetPokemons() {
   }
 
   return (
-    <div className="box">
-      <div className="pokemonList">
-        {items && items.map((item) =>
-          <PokemonCard key={item.id} item={item} turnCard={turnCard} />
-        )}
+    <>
+      {gameStat === 1 && <Winning />}
+      <div className="box">
+        <div className="pokemonList">
+          {items && items.map((item) =>
+            <PokemonCard key={item.id} item={item} turnCard={turnCard} />
+          )}
+        </div>
+        <div className="css-doodle">
+          <div className="score-table">Score Table</div>
+          <div>Movement: {move}</div>
+          <div>Point: {score}</div>
+        </div>
       </div>
-      <div class="css-doodle">
-        <div className="score-table">Score Table</div>
-        <div>Movement: {move}</div>
-        <div>Point: {score}</div>
-      </div>
-    </div>
+    </>
   );
 }
 
