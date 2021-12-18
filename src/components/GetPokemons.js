@@ -119,6 +119,10 @@ function GetPokemons() {
   }, [selectedCards]);
 
   const restart = () => {
+    let storedScores = JSON.parse(localStorage.getItem("scores")) || [];
+    localStorage.setItem("scores", JSON.stringify([...storedScores,score]));
+    setScore(0);
+    setMove(0);
     setGameStat(0);
     refetch();
   }
