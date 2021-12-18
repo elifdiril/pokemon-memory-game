@@ -7,9 +7,10 @@ import shuffleArray from '../helpers/shuffleArray';
 import { nanoid } from 'nanoid';
 import calculateScore from '../helpers/calculateScore';
 import Winning from './Winning';
+import Restart from './Restart';
 
 function GetPokemons() {
-  const { loading, error, data } = useQuery(POKEMONS_QUERY);
+  const { loading, error, data, refetch } = useQuery(POKEMONS_QUERY);
   const [items, setItems] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [move, setMove] = useState(0);
@@ -55,7 +56,7 @@ function GetPokemons() {
 
       setItems(shuffleArray(newItemList));
     }
-  }, [data]);
+  }, [data, gameStat]);
 
   const turnCard = (id) => {
     let newSelectedCard = {};
@@ -95,7 +96,7 @@ function GetPokemons() {
           }
           return item;
         });
-        setTimeout(() => setItems(newCards), 1000);
+        setTimeout(() => setItems(newCards), 500);
       }
       else {
         let newCards = items.map((item) => {
@@ -111,11 +112,16 @@ function GetPokemons() {
           }
           return item;
         });
-        setTimeout(() => setItems(newCards), 1000);
+        setTimeout(() => setItems(newCards), 500);
       }
-      setTimeout(() => setSelectedCards([]), 1010);
+      setTimeout(() => setSelectedCards([]), 510);
     }
   }, [selectedCards]);
+
+  const restart = () => {
+    setGameStat(0);
+    refetch();
+  }
 
   if (loading) {
     return <div>Loading...</div>;
@@ -127,8 +133,12 @@ function GetPokemons() {
 
   return (
     <>
-      {gameStat === 1 && <Winning />}
-      <div className="box">
+      {gameStat === 1 &&
+        <>
+          <Winning />
+          <Restart restart={restart} />
+        </>}
+      {gameStat === 0 && <div className="box">
         <div className="pokemonList">
           {items && items.map((item) =>
             <PokemonCard key={item.id} item={item} turnCard={turnCard} />
@@ -139,7 +149,7 @@ function GetPokemons() {
           <div>Movement: {move}</div>
           <div>Point: {score}</div>
         </div>
-      </div>
+      </div>}
     </>
   );
 }

@@ -3,7 +3,10 @@ import '../styles/win.css';
 
 function Winning() {
     return (
-        <h1 className="tada">Congratulations !</h1>
+        <>
+            <h1 className="tada">Congratulations !</h1>
+            <h1 className="tada2">Congratulations !</h1>
+        </>
     );
 }
 

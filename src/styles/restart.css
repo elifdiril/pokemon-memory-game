@@ -1,0 +1,26 @@
+.res {
+    font-family: arial;
+    color: #14396A !important;
+    font-size: 25px;
+    text-shadow: 3px 3px 3px #7CACDE;
+    box-shadow: 1px 1px 1px #BEE2F9;
+    padding: 10px 25px;
+    -moz-border-radius: 19px;
+    -webkit-border-radius: 19px;
+    border-radius: 19px;
+    background: #468ccf;
+    background: linear-gradient(to bottom,  #a1cce6,  #003c74);
+    background: -ms-linear-gradient(to bottom,  #a1cce6,  #003c74);
+    background: -webkit-gradient(linear, left top, left bottom, from(#a1cce6), to(#003c74));
+    background: -moz-linear-gradient(to bottom,  #a1cce6,  #003c74);
+    margin: 20%;
+  }
+  .res:hover {
+    color: #14396A !important;
+    background: grad;
+    background: linear-gradient(to bottom,  #003c74,  #a1cce6);
+    background: -ms-linear-gradient(to bottom,  #003c74,  #a1cce6);
+    background: -webkit-gradient(linear, left top, left bottom, from(#003c74), to(#a1cce6));
+    background: -moz-linear-gradient(top,  #003c74,  #a1cce6);
+  }
+  
