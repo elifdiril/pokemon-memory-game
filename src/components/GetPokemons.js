@@ -96,7 +96,7 @@ function GetPokemons() {
           }
           return item;
         });
-        setTimeout(() => setItems(newCards), 500);
+        setTimeout(() => setItems(newCards), 450);
       }
       else {
         let newCards = items.map((item) => {
@@ -112,9 +112,9 @@ function GetPokemons() {
           }
           return item;
         });
-        setTimeout(() => setItems(newCards), 500);
+        setTimeout(() => setItems(newCards), 450);
       }
-      setTimeout(() => setSelectedCards([]), 510);
+      setTimeout(() => setSelectedCards([]), 500);
     }
   }, [selectedCards]);
 
