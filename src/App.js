@@ -1,12 +1,12 @@
 import './App.css';
 import GetPokemons from './components/GetPokemons';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <GetPokemons />
     </div>
   );
-}
+};
 
 export default App;
