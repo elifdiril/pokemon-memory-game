@@ -8,19 +8,7 @@
     }
 }
 
-@keyframes tada2 {
-    from {
-        margin-left: 10%;
-        margin-top: 15%;
-    }
-
-    to {
-        margin-left: 25%;
-        margin-top: 15%;
-    }
-}
-
-.tada, .tada2 {
+.tada {
     -webkit-animation-name: tada;
     animation-name: tada;
     animation-duration: 3s;
@@ -32,9 +20,4 @@
         0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3),
         0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
         0 20px 20px rgba(0, 0, 0, 0.15);
-}
-
-.tada2 {
-    -webkit-animation-name: tada2;
-    animation-name: tada2;
 }

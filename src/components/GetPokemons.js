@@ -8,6 +8,7 @@ import { nanoid } from 'nanoid';
 import calculateScore from '../helpers/calculateScore';
 import Winning from './Winning';
 import Restart from './Restart';
+import Scores from './Scores';
 
 function GetPokemons() {
   const { loading, error, data, refetch } = useQuery(POKEMONS_QUERY);
@@ -17,6 +18,7 @@ function GetPokemons() {
   const [score, setScore] = useState(0);
   const [gameStat, setGameStat] = useState(0);
   const [pokemons, setPokemons] = useState([]);
+  const [allScores, setAllScores] = useState([]);
 
   useEffect(() => {
     if (move >= 12) {
@@ -28,6 +30,9 @@ function GetPokemons() {
       })
 
       if (openedCardNumber === 12) {
+        let storedScores = JSON.parse(localStorage.getItem("scores")) || [];
+        localStorage.setItem("scores", JSON.stringify([...storedScores, score]));
+        setAllScores([...storedScores, score]);
         setGameStat(1);
       }
     }
@@ -119,8 +124,6 @@ function GetPokemons() {
   }, [selectedCards]);
 
   const restart = () => {
-    let storedScores = JSON.parse(localStorage.getItem("scores")) || [];
-    localStorage.setItem("scores", JSON.stringify([...storedScores,score]));
     setScore(0);
     setMove(0);
     setGameStat(0);
@@ -140,6 +143,7 @@ function GetPokemons() {
       {gameStat === 1 &&
         <>
           <Winning />
+          <Scores allScores={allScores} />
           <Restart restart={restart} />
         </>}
       {gameStat === 0 && <div className="box">
