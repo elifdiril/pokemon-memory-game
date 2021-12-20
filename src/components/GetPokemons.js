@@ -21,6 +21,7 @@ function GetPokemons() {
   const [allScores, setAllScores] = useState([]);
 
   useEffect(() => {
+    //is game over or not
     if (move >= 12) {
       let openedCardNumber = 0;
       items.map((item) => {
@@ -39,6 +40,7 @@ function GetPokemons() {
   }, [move]);
 
   useEffect(() => {
+    //pokemon array created
     if (data) {
       let _pokemons = data.pokemons;
       setPokemons(data.pokemons);
@@ -119,6 +121,8 @@ function GetPokemons() {
         });
         setTimeout(() => setItems(newCards), 450);
       }
+      //if two card selected, there is a control if they equal or not, either way set 
+      //selected card empty arr
       setTimeout(() => setSelectedCards([]), 500);
     }
   }, [selectedCards]);
