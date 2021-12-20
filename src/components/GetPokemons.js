@@ -143,8 +143,10 @@ function GetPokemons() {
       {gameStat === 1 &&
         <>
           <Winning />
-          <Scores allScores={allScores} />
-          <Restart restart={restart} />
+          <div className='res-score'>
+            <Restart restart={restart} />
+            <Scores allScores={allScores} />
+          </div>
         </>}
       {gameStat === 0 && <div className="box">
         <div className="pokemonList">

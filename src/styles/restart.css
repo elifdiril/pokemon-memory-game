@@ -13,7 +13,7 @@
     background: -ms-linear-gradient(to bottom,  #a1cce6,  #003c74);
     background: -webkit-gradient(linear, left top, left bottom, from(#a1cce6), to(#003c74));
     background: -moz-linear-gradient(to bottom,  #a1cce6,  #003c74);
-    margin: 20%;
+    margin: 7%;
   }
   .res:hover {
     color: #14396A !important;
