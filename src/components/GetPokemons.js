@@ -149,15 +149,16 @@ function GetPokemons() {
           </div>
         </>}
       {gameStat === 0 && <div className="box">
-        <div className="pokemonList">
-          {items && items.map((item) =>
-            <PokemonCard key={item.id} item={item} turnCard={turnCard} />
-          )}
-        </div>
         <div className="css-doodle">
           <div className="score-table">Score Table</div>
           <div>Movement: {move}</div>
           <div>Point: {score}</div>
+        </div>
+
+        <div className="pokemonList">
+          {items && items.map((item) =>
+            <PokemonCard key={item.id} item={item} turnCard={turnCard} />
+          )}
         </div>
       </div>}
     </>

@@ -3,7 +3,7 @@ import '../styles/scores.css';
 
 function Scores({allScores}) {
     return (
-        <div className="css-doodle">
+        <div className="css-doodle2">
           <div className="score-table">Scores</div>
           {allScores.map((item, key) => <div key={key}>Point: {item}</div>)}
         </div>

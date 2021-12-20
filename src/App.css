@@ -1,5 +1,5 @@
 .App {
-  padding: 89px 0 0 30%;
+  padding: 65px 0 0 30%;
 }
 
 .item {
@@ -31,7 +31,7 @@
   background: -o-linear-gradient(top left, #8fb5bf 40%, #24707d 100%);
   background: linear-gradient(to bottom right, #8fb5bf 40%, #24707d 100%);
   width: 200px;
-  height: 200px;
+  height: 100px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -44,13 +44,13 @@
 }
 
 .css-doodle > div {
-  margin: 25px;
+  margin: 5px;
 }
 
 .box {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
 }
 
@@ -70,7 +70,7 @@
   line-height: 20px;
 }
 
-.res-score{
+.res-score {
   display: flex;
   flex-direction: column;
   align-items: center;
