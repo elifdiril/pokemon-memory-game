@@ -28,7 +28,7 @@ function GetPokemons() {
         if (item.isOpen) {
           openedCardNumber++;
         }
-      })
+      });
 
       if (openedCardNumber === 12) {
         let storedScores = JSON.parse(localStorage.getItem("scores")) || [];
@@ -79,7 +79,7 @@ function GetPokemons() {
           setMove(move + 1);
 
           if (!item.isOpen) {
-            newSelectedCard = updatedItem
+            newSelectedCard = updatedItem;
           }
           return updatedItem;
         }
@@ -88,7 +88,7 @@ function GetPokemons() {
       setSelectedCards([...selectedCards, newSelectedCard]);
       setItems(newCards);
     }
-  }
+  };
 
   useEffect(() => {
     if (selectedCards.length === 2) {
@@ -132,7 +132,7 @@ function GetPokemons() {
     setMove(0);
     setGameStat(0);
     refetch();
-  }
+  };
 
   if (loading) {
     return <div>Loading...</div>;
