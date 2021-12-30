@@ -4,10 +4,10 @@
     background: -ms-linear-gradient(top left, #8fb5bf 40%, #24707d 100%);
     background: -o-linear-gradient(top left, #8fb5bf 40%, #24707d 100%);
     background: linear-gradient(to bottom right, #8fb5bf 40%, #24707d 100%);
-    width: 200px;
-    height: 200px;
+    width: 350px;
+    height: 350px;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
     display: inline-flex;
     flex-wrap: wrap;
     border-color: #000;

@@ -17,7 +17,7 @@ function GetPokemons() {
   const [move, setMove] = useState(0);
   const [score, setScore] = useState(0);
   const [gameStat, setGameStat] = useState(0);
-  const [pokemons, setPokemons] = useState([]);
+  const [, setPokemons] = useState([]);
   const [allScores, setAllScores] = useState([]);
 
   useEffect(() => {
